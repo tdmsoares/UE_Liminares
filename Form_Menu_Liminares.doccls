@@ -1,0 +1,107 @@
+Option Explicit
+
+
+Private Sub Comando105_Click()
+AtualizarPesquisaRápida
+Verificar.DeterminarCicloCrianças
+End Sub
+
+Private Sub Comando24_Click()
+'
+'Abre o Relatório com a Relação de Liminares Cadastradas
+DoCmd.OpenReport "Liminar_Relação", acViewReport
+End Sub
+
+Private Sub Comando26_Click()
+'
+'Abre o Relatório com a Relação de Liminares Pendente
+'(Disponibilizadas e que nenhum responsável veio fazer a Matrícula, devendo ser notificado a SE)
+DoCmd.OpenReport "Liminares_Pendentes", acViewReport
+End Sub
+
+Private Sub Comando34_Click()
+'
+'Imprime o Relatório com a Relação de Liminares Cadastradas
+DoCmd.OpenReport ("Liminar_Relação")
+End Sub
+
+Private Sub Comando36_Click()
+'
+'Imprime o Relatório com a Relação de Liminares Pendentes
+'(Disponibilizadas e que nenhum responsável veio fazer a Matrícula, devendo ser notificado a SE)
+DoCmd.OpenReport ("Liminares_Pendentes")
+End Sub
+
+Private Sub Comando82_Click()
+'
+'Sai e abre o form correspondente
+DoCmd.Close
+'
+'Confirma se quer fazer o cadastro antes de abrir o form
+Dim Aberto
+'
+Aberto = Aviso.Cadastro(Form_Cadastro_Liminares.Name)
+'
+If (Aberto = False) Then
+DoCmd.OpenForm ("Menu_Liminares")
+End If '
+
+End Sub
+
+Private Sub Comando84_Click()
+'
+'Sai e abre o form correspondente
+DoCmd.Close
+'
+'Confirma se quer fazer o cadastro antes de abrir o form
+Dim Aberto
+'
+Aberto = Aviso.Cadastro("Cadastro_Novo-Liminares")
+'
+If (Aberto = False) Then
+DoCmd.OpenForm ("Menu_Liminares")
+End If '
+
+End Sub
+
+Private Sub Comando92_Click()
+'
+'Sai e abre o form correspondente
+DoCmd.Close
+'
+'Confirma se quer fazer o cadastro antes de abrir o form
+Dim Aberto
+'
+Aberto = Aviso.Cadastro("Cadastro Ciclo")
+'
+If (Aberto = False) Then
+DoCmd.OpenForm ("Menu_Liminares")
+End If
+
+End Sub
+
+Private Sub Form_Load()
+Me.Rótulo131.Caption = "Desenvolvido por Tiago D. M. Soares"
+End Sub
+
+Private Sub txtNome_AfterUpdate()
+'
+'Deixa em Maiúsculo
+Me.txtNome = UCase(Me.txtNome)
+End Sub
+
+Private Sub txtNome_Change()
+'
+'Pesquisa instantânea dos nomes constantes no subformulário
+If (Me.txtNome = "") Then
+    [Form_Pesquisa Criança subformulário].FilterOn = False
+Else:
+    [Form_Pesquisa Criança subformulário].Filter = "PesquisaRápidaCriança.Nome Like '" & Me.txtNome.Text & "*'"
+    [Form_Pesquisa Criança subformulário].FilterOn = True
+End If
+End Sub
+
+Private Sub txtNome_GotFocus()
+AtualizarTabela.AtualizarPesquisaRápida
+Verificar.DeterminarCicloCrianças
+End Sub
