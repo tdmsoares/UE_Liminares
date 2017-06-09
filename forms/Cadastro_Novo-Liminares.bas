@@ -15,8 +15,8 @@ Begin Form
     ItemSuffix =21
     Left =4995
     Top =2415
-    Right =24945
-    Bottom =14505
+    Right =20445
+    Bottom =13050
     DatasheetGridlinesColor =15062992
     RecSrcDt = Begin
         0x5b467413ae5fe440
@@ -948,8 +948,8 @@ Private Sub txtNome_Change()
 If (Me.txtNome = "") Then
     [Form_Criança subformulário].FilterOn = False
 Else:
-    [Form_Criança subformulário].Filter = "Criança.Nome Like '" & Me.txtNome.Text & "*'"
-    [Form_Criança subformulário].FilterOn = True
+    Form_Criança_subformulário.Filter = "Criança.Nome Like '" & Me.txtNome.Text & "*'"
+    Form_Criança_subformulário.FilterOn = True
 End If
 End Sub
 
